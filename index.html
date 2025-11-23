@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Naveen 💖</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#ff6b81;
+      --muted:#9aa4b2;
+      --text:#e6eef8;
+      --max-width:720px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;background:
+      radial-gradient(ellipse at 10% 10%, rgba(255,107,129,0.06), transparent 10%),
+      linear-gradient(180deg,#071021 0%, #081523 50%, #061018 100%);
+      color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans',Arial,Helvetica;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%;}
+
+    body{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      overflow-x:hidden;
+    }
+
+    .wrap{width:100%;max-width:var(--max-width);margin:0 auto;padding:12px}
+
+    .card{
+      width:100%;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);overflow:visible;
+    }
+
+    header{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .header-image{width:72px;height:72px;border-radius:10px;overflow:hidden;flex:0 0 auto;background:linear-gradient(135deg,var(--accent),#7be0ff)}
+    .header-image img{width:100%;height:100%;object-fit:cover;display:block}
+    .meta{flex:1 1 auto;min-width:0}
+    h1{margin:0 0 6px 0;font-size:22px;line-height:1.06}
+    p.lead{margin:0;color:var(--muted);font-size:14px}
+
+    .center{display:flex;align-items:center;justify-content:center;margin-top:14px}
+    .big-button{appearance:none;cursor:pointer;border:0;padding:12px 18px;border-radius:12px;font-weight:700;font-size:17px;background:linear-gradient(90deg,var(--accent),#ff9db1);color:#061018;box-shadow:0 8px 24px rgba(255,107,129,0.12);transition:transform .12s ease}
+    .big-button:active{transform:translateY(2px)}
+    .big-button:focus{outline:3px solid rgba(255,107,129,0.14);outline-offset:3px}
+
+    .footer{display:flex;gap:12px;align-items:center;margin-top:14px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+
+    /* FULLSCREEN MODAL - ensures content is always visible */
+    .modal {
+      position:fixed;
+      inset:0;
+      display:none; /* hidden by default */
+      align-items:center;
+      justify-content:center;
+      z-index:1200;
+    }
+    .modal.open { display:flex; }
+    .modal-backdrop {
+      position:absolute; inset:0; background:rgba(2,6,23,0.75); backdrop-filter:blur(4px);
+    }
+    .modal-card {
+      position:relative;
+      width:100%;
+      max-width:900px;
+      max-height:90vh;
+      overflow:auto;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:20px 20px 26px 20px;
+      box-shadow:0 20px 60px rgba(2,6,23,0.7);
+      border:1px solid rgba(255,255,255,0.04);
+    }
+
+    /* Modal close button */
+    .close-btn {
+      position:absolute;
+      right:12px;
+      top:12px;
+      background:transparent;
+      border:0;
+      color:var(--text);
+      font-size:20px;
+      cursor:pointer;
+      padding:8px;
+      border-radius:8px;
+    }
+    .close-btn:focus{outline:3px solid rgba(255,107,129,0.14)}
+
+    .modal-content h2{margin-top:0;font-size:20px}
+    .modal-content p{margin:10px 0;line-height:1.5;color:#f3f8ff}
+
+    /* Use conservative sizes inside modal and allow comfortable reading */
+    .modal-content .poem p{font-size:16px}
+    .modal-content .love-note p{font-size:15px;color:#fbfeff}
+
+    /* ensure modal scrollbars are inside card, not entire page */
+    .modal-card:focus{outline:none}
+
+    /* small screens adjustments */
+    @media (max-width:640px){
+      .modal-card{max-width:92vw;padding:16px;max-height:94vh}
+      .modal-content .poem p{font-size:15px}
+      .modal-content .love-note p{font-size:14px}
+      .big-button{width:100%}
+      h1{text-align:center}
+    }
+
+    @media (max-width:380px){
+      .modal-content .poem p{font-size:14px}
+      .modal-content .love-note p{font-size:13.5px}
+    }
+
+    /* confetti canvas sits under modal/backdrop so it's visible behind */
+    #confetti{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1100}
+  </style>
+</head>
+<body>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <div class="wrap">
+    <div class="card" id="cardRoot">
+      <header>
+        <div class="header-image" aria-hidden="true">
+          <img src="/mnt/data/416bdec0-d74a-41e1-aed2-9c033173a96a.png" alt="photo">
+        </div>
+
+        <div class="meta">
+          <h1>Happy Birthday, Bangaram 🎂</h1>
+          <p class="lead">For the one who's stolen my heart — a small site made in love. Press the button to open your surprise.</p>
+        </div>
+
+        <div style="margin-left:auto;text-align:right">
+          <div style="width:48px;height:48px;border-radius:10px;background:linear-gradient(180deg,#ff8aa0,#ff5d83);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(255,107,129,0.12)">❤</div>
+        </div>
+      </header>
+
+      <div class="center" style="margin-top:18px">
+        <button id="revealBtn" class="big-button" aria-expanded="false">Click me babe</button>
+      </div>
+
+      <div style="margin-top:18px" class="footer">
+        <div>Made with ❤️ and a lot of memories</div>
+        <div style="margin-left:auto">love 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FULLSCREEN MODAL (always on top) -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-backdrop" tabindex="-1"></div>
+    <div class="modal-card" role="document" aria-labelledby="modalTitle" tabindex="0">
+      <button class="close-btn" id="modalClose" aria-label="close">✕</button>
+
+      <div class="modal-content" id="modalContent">
+        <h2 id="modalTitle">Puttina roju jejelu chitti papai</h2>
+
+        <div class="poem" aria-live="polite">
+          <p>We crossed paths in an unexpected moment, and that single accident of fate gave me memories I could never forget.</p>
+          <p>You once said you would send me away, yet you stayed by my side — and still, every day, you remain with me.</p>
+          <p>No one will ever be like you: your laugh, your stubborn little ways, the quiet comfort you bring — you are irreplaceable.</p>
+          <p>A million small reasons — for every ordinary day that shines because of you, for every gentle kindness and every stubborn smile, I love you more than words can hold.</p>
+
+          <hr style="opacity:.06;margin:12px 0">
+
+          <p style="font-style:italic">On this day, I wish you joy that fits like sunlight — warm, simple, and impossible to forget.</p>
+
+          <p style="font-weight:700">— Always, your Hashita itlu Dumbuuuu 💫</p>
+        </div>
+
+        <div class="love-note" style="margin-top:14px">
+          <h3 style="margin:0 0 8px 0">Love Note</h3>
+          <p>Wish you a very happy bangaram — you are the best thing that happened to me in the last 4 years. Oka roller coaster ayipoyindiii, kani edi emi ayina end of the day manam eppudu kalise unnam.</p>
+          <p>Mana relation ni 'love' ani okka chinna word saripodu. Nuvvu dorakadam oka varam ani cheppite takkuve avuatdii... of course nenu dorkakadam koda lee. Love u a lot. ❤️</p>
+        </div>
+
+        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+          <button id="playAgain" class="big-button" style="background:linear-gradient(90deg,#7be0ff,#ffd1e0);color:#061018;padding:10px 14px;font-size:15px">Play confetti again</button>
+          <a id="downloadCard" class="big-button" style="background:rgba(255,107,129,0.16);color:#fff;padding:10px 14px;font-size:15px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center">Save as image</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // confetti canvas
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = innerWidth;
+    let H = canvas.height = innerHeight;
+    window.addEventListener('resize', ()=> { W = canvas.width = innerWidth; H = canvas.height = innerHeight; });
+
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+    function Confetto(){ this.x = rand(0,W); this.y = rand(-H,0); this.r = rand(6,10); this.d = rand(1,3); this.color = `hsl(${~~rand(0,360)},70%,60%)`; this.tilt = rand(-8,8); this.tiltSpeed = rand(.08,.5); }
+    Confetto.prototype.draw = function(){ ctx.beginPath(); ctx.ellipse(this.x,this.y,this.r,this.r/1.6,this.tilt*Math.PI/180,0,2*Math.PI); ctx.fillStyle=this.color; ctx.fill(); }
+
+    let confettis = [];
+    function runConfetti(){ cancelAnimationFrame(runConfetti._id); function loop(){ ctx.clearRect(0,0,W,H); for(let i=confettis.length-1;i>=0;i--){ let c=confettis[i]; c.y += c.d + 1; c.x += Math.sin(c.y/20); c.tilt += c.tiltSpeed; if(c.y>H+20) confettis.splice(i,1); else c.draw(); } if(confettis.length>0) runConfetti._id = requestAnimationFrame(loop); } loop(); }
+    function burst(count=80){ confettis = []; for(let i=0;i<count;i++) confettis.push(new Confetto()); runConfetti(); }
+
+    // elements
+    const revealBtn = document.getElementById('revealBtn');
+    const modal = document.getElementById('modal');
+    const modalClose = document.getElementById('modalClose');
+    const modalCard = document.querySelector('.modal-card');
+    const playAgain = document.getElementById('playAgain');
+    const downloadCard = document.getElementById('downloadCard');
+
+    // open modal
+    revealBtn.addEventListener('click', ()=>{
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      revealBtn.setAttribute('aria-expanded','true');
+      // initial confetti burst behind modal
+      burst(90);
+      // focus modal for accessibility
+      setTimeout(()=> modalCard.focus(), 160);
+    });
+
+    // close modal (button + backdrop)
+    modalClose.addEventListener('click', closeModal);
+    document.querySelector('.modal-backdrop').addEventListener('click', closeModal);
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      revealBtn.setAttribute('aria-expanded','false');
+      // clear confetti gracefully
+      confettis = [];
+      cancelAnimationFrame(runConfetti._id);
+    }
+
+    // play confetti again inside modal
+    playAgain.addEventListener('click', ()=> burst(70));
+
+    // quick save: export modal content as SVG (card screenshot)
+    downloadCard.addEventListener('click', (e)=>{
+      e.preventDefault();
+      // create a temporary element that contains the modal content for capture
+      const doc = document.querySelector('.modal-card').cloneNode(true);
+      // remove buttons (optional) and close icon in clone for a cleaner image
+      const closeBtn = doc.querySelector('.close-btn');
+      if(closeBtn) closeBtn.remove();
+      const playBtn = doc.querySelector('#playAgain');
+      if(playBtn) playBtn.remove();
+      const dlBtn = doc.querySelector('#downloadCard');
+      if(dlBtn) dlBtn.remove();
+      const rect = document.querySelector('.modal-card').getBoundingClientRect();
+      doc.style.margin = '0';
+      const serialized = new XMLSerializer().serializeToString(doc).replace(/#/g,'%23');
+      const svg = `<?xml version='1.0' encoding='utf-8'?><svg xmlns='http://www.w3.org/2000/svg' width='${Math.ceil(rect.width)}' height='${Math.ceil(rect.height)}'><foreignObject width='100%' height='100%'>${serialized}</foreignObject></svg>`;
+      const blob = new Blob([svg], {type:'image/svg+xml;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'naveen_birthday_modal.svg'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // keyboard: close on ESC
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    // typed intro for page header (optional)
+    (function typeIntro(){ const title = document.querySelector('h1'); const txt = "Happy Birthday, Naveen 🎂"; let i=0; title.textContent=''; const t = setInterval(()=>{ title.textContent += txt[i++] || ''; if(i>txt.length) clearInterval(t); },22); })();
+  </script>
+</body>
+</html>
